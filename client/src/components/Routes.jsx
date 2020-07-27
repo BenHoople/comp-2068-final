@@ -56,16 +56,17 @@ function Routes ({user, setUser}) {
         it checks if you're logged in. if not, then you are going to the home page. Hope that was sufficient. 
         */
       }
-      <Route exact path="/tours" render={
+      <Route exact path="/tours" user={user} render={
         props => user ? (
-          <Tours {...props} user={user} />
+          <Tours {...props}  />
         ) : (
           <Redirect to="/"/>
         )
       }/>
       <Route exact path="/tours/new" render={
         props => user ? (
-          <NewTour {...props} />
+          <NewTour {...props}
+          user={user}  />
         ) : (
           <Redirect to="/"/>
         )

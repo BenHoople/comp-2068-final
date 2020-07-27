@@ -59,7 +59,7 @@ const Index = function ({user}) {
               </p>
             </div>
 
-            {user ? (
+            {typeof user !== undefined ? (
               <div className="card-footer">
                 <Link to={{
                   pathname: "/tours/edit",

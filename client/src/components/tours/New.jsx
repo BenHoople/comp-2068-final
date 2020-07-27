@@ -6,12 +6,11 @@ import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
-const New = function () {
+const New = function ({user}) {
 
   const [tourTypes, setTourTypes] = useState([]);
 
   const [inputs, setInputs] = useState({
-    user: '',
     title: '',
     tourType: '',
     groupSize: 0,

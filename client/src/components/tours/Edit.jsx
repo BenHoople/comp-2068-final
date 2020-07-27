@@ -9,8 +9,10 @@ const Edit = function (props) {
 
   const id = props.location.state.id; // found in docs for react router
 
+  const [tourTypes, setTourTypes] = useState([]);
+
+
   const [inputs, setInputs] = useState({
-    user: '',
     title: '',
     tourType: '',
     groupSize: 0,
@@ -25,6 +27,22 @@ const Edit = function (props) {
       if (toursResp.status === 200) setInputs(toursResp.data);
     })();
   }, []);
+
+
+  useEffect(() => {
+    (async () => {
+      await getTourTypes();
+    })();
+  }, []);
+
+  const getTourTypes = async function(){
+    const tourTypeResp = await Axios.get('/api/tours/tourTypes');
+    
+    console.log(tourTypeResp);
+    if(tourTypeResp.status === 200) {
+      setTourTypes(tourTypeResp.data);
+    }
+  };
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -87,7 +105,7 @@ const Edit = function (props) {
               onChange={handleInputChange}
               defaultValue={inputs.tourType}
             >
-              {inputs.tourTypes.map((type, i) => (
+              {tourTypes.map((type, i) => (
                 <option key={i} value={type}>{type}</option>
               ))}
             </Form.Control>

@@ -44,6 +44,10 @@ const New = function () {
           type: toast.TYPE.SUCCESS
         });
         setRedirect(true);
+      }else{
+          toast('That failed to work...', {
+            type: toast.TYPE.ERROR
+          });
       }
     }catch(error){
       toast('That didnt work... sorry!', {

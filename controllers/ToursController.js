@@ -2,7 +2,7 @@ const Tour = require('../models/tour');
 const User = require('../models/user');
 
 const getUser = async req => {
-  const { user: email } = req.session.passport;
+  const { user: email } = await req.session.passport;
   return await User.findOne({email: email});
 }
 
@@ -52,7 +52,7 @@ exports.show = async (req, res) => {
 exports.create = async (req, res) => {
   try {
     const user = await getUser(req);
-
+    console.log(req.body);
     const tour = await Tour.create({user: user._id, ...req.body});
 
     res.status(200).json(tour);
